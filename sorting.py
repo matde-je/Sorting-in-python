@@ -27,8 +27,8 @@ def sorting(lst, ascending=True):
 def execute(data, n, ascending=True):
     df = pd.DataFrame(columns=["Time", "Max", "Min", "Iterations"])
     for i, partition in enumerate(partitions(data, n)):
-        start_time = time.time()
         lst = partition["x"].tolist()
+        start_time = time.time()
         sorted_lst, iterations, min_val, max_val = sorting(lst, ascending)
         end_time = time.time()
         df.loc[i] = [end_time - start_time, max_val, min_val, iterations]
