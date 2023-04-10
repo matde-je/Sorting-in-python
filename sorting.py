@@ -25,14 +25,14 @@ def sorting(lst, ascending=True):
     return lst, iterations, lst[0], lst[-1]
 
 def execute(data, n, ascending=True):
-    df_out = pd.DataFrame(columns=["Time", "Max", "Min", "Iterations"])
+    df = pd.DataFrame(columns=["Time", "Max", "Min", "Iterations"])
     for i, partition in enumerate(partitions(data, n)):
         start_time = time.time()
         lst = partition["x"].tolist()
         sorted_lst, iterations, min_val, max_val = sorting(lst, ascending)
         end_time = time.time()
-        df_out.loc[i] = [end_time - start_time, max_val, min_val, iterations]
-    return df_out
+        df.loc[i] = [end_time - start_time, max_val, min_val, iterations]
+    return df
 
 data_file = '/home/matilde/Documents/trabalhoeda/Sorting-in-python/data.csv'
 ascending = True
