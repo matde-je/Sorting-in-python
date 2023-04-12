@@ -25,23 +25,23 @@ def sorting(lst, ascending=True):
     return lst, iterations, lst[0], lst[-1]
 
 def execute(data, n, ascending=True):
-    df = pd.DataFrame(columns=["Time", "Max", "Min", "Iterations"])
+    pd_df = pd.DataFrame(columns=["Time", "Max", "Min", "Iterations"])
     for i, partition in enumerate(partitions(data, n)):
         lst = partition["x"].tolist()
         start_time = time.time()
         sorted_lst, iterations, min_val, max_val = sorting(lst, ascending)
         end_time = time.time()
-        df.loc[i] = [end_time - start_time, max_val, min_val, iterations]
-    return df
+        pd_df.loc[i] = [end_time - start_time, max_val, min_val, iterations]
+    return pd_df
 
 data_file = '/home/matilde/Documents/trabalhoeda/Sorting-in-python/data.csv'
 ascending = True
 max_n = 10001
-nrows = 1000
+n_rows = 1000
 times = []
 lst = []
 
-for n in range(nrows, max_n + 1, nrows):
+for n in range(n_rows, max_n + 1, n_rows):
     start_time = time.time()
     execute(data_file, n, ascending)
     end_time = time.time()
@@ -59,11 +59,11 @@ if __name__ == "__main__":
         print(f"Chunk {i+1}:")
         print(chunk)
         
-    df = pd.read_csv(data_file)
-    sorted_data = quicksort(df['x'].tolist())
+    pd_df = pd.read_csv(data_file)
+    sorted_data = quicksort(pd_df['x'].tolist())
     result = execute(data_file, 100, ascending)
     print(result)
-    lst = df['x'].tolist()
+    lst = pd_df['x'].tolist()
     sorted_lst, iterations, min_val, max_val = sorting(lst, ascending)
     print(f"Sorted list: {sorted_lst}")
     print(f"Min value: {min_val}")
