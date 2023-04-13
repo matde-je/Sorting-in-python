@@ -17,7 +17,7 @@ def quicksort(chunk, iterations=0):
     right = [x for x in chunk if x > pivot]
     sorted_left, iterations = quicksort(left, iterations + 1)
     sorted_right, iterations = quicksort(right, iterations + 1)
-    return quicksort(left) + middle + quicksort(right)
+    return quicksort(left) + middle + quicksort(right), iterations
 
 def sorting(lst, ascending=True):
     lst, iterations = quicksort(lst)
