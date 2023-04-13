@@ -8,18 +8,19 @@ def partitions(data, n):
         chunks.append(chunk)
     return chunks
 
-def quicksort(chunk):
+def quicksort(chunk, iterations=0):
     if len(chunk) <= 1:
         return chunk
     pivot = chunk[len(chunk) // 2]
     left = [x for x in chunk if x < pivot]
     middle = [x for x in chunk if x == pivot]
     right = [x for x in chunk if x > pivot]
+    sorted_left, iterations = quicksort(left, iterations + 1)
+    sorted_right, iterations = quicksort(right, iterations + 1)
     return quicksort(left) + middle + quicksort(right)
 
 def sorting(lst, ascending=True):
-    iterations = 0
-    lst = quicksort(lst)
+    lst, iterations = quicksort(lst)
     if not ascending:
         lst = lst[::-1]
     return lst, iterations, lst[0], lst[-1]
