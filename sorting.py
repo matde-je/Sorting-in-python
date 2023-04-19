@@ -19,11 +19,11 @@ def quicksort(chunk, iterations=0):
     sorted_right, iterations = quicksort(right, iterations + 1)
     return quicksort(left) + middle + quicksort(right), iterations
 
-def sorting(lst, ascending=True):
-    lst, iterations = quicksort(lst)
+def sorting(chunk, ascending=True):
+    chunk, iterations = quicksort(chunk)
     if not ascending:
-        lst = lst[::-1]
-    return lst, iterations, lst[0], lst[-1]
+        chunk = chunk[::-1]
+    return chunk, iterations, chunk[0], chunk[-1]
 
 def execute(data, n, ascending=True):
     pd_df = pd.DataFrame(columns=["Time", "Max", "Min", "Iterations"])
@@ -35,13 +35,14 @@ def execute(data, n, ascending=True):
         pd_df.loc[i] = [end_time - start_time, max_val, min_val, iterations]
     return pd_df
 
-data_file = '/home/matilde/Documents/trabalhoeda/Sorting-in-python/data.csv'
+data_file = #insert your data file path here, here is mine as an exemple:'/home/matilde/Documents/trabalhoeda/Sorting-in-python/data.csv'
 ascending = True
 max_n = 10001
 n_rows = 1000
 times = []
 lst = []
 
+#graph
 for n in range(n_rows, max_n + 1, n_rows):
     start_time = time.time()
     execute(data_file, n, ascending)
@@ -54,6 +55,7 @@ plt.xlabel("n")
 plt.ylabel("Tempo total de execução (segundos)")
 plt.show()
 
+#testing
 if __name__ == "__main__":
     chunks = partitions(data_file, 100)
     for i, chunk in enumerate(chunks):
