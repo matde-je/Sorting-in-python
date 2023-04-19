@@ -36,7 +36,6 @@ def execute(data, n, ascending=True):
     return pd_df
 
 data_file = #insert your data file path here, here is mine as an exemple:'/home/matilde/Documents/trabalhoeda/Sorting-in-python/data.csv'
-ascending = True
 max_n = 10001
 n_rows = 1000
 times = []
@@ -45,7 +44,7 @@ lst = []
 #graph
 for n in range(n_rows, max_n + 1, n_rows):
     start_time = time.time()
-    execute(data_file, n, ascending)
+    execute(data_file, n)
     end_time = time.time()
     times.append(end_time - start_time)
     lst.append(n)
@@ -64,10 +63,10 @@ if __name__ == "__main__":
         
     pd_df = pd.read_csv(data_file)
     sorted_data = quicksort(pd_df['x'].tolist())
-    result = execute(data_file, 100, ascending)
+    result = execute(data_file, 100)
     print(result)
     lst = pd_df['x'].tolist()
-    sorted_lst, iterations, min_val, max_val = sorting(lst, ascending)
+    sorted_lst, iterations, min_val, max_val = sorting(lst)
     print(f"Sorted list: {sorted_lst}")
     print(f"Min value: {min_val}")
     print(f"Max value: {max_val}")
